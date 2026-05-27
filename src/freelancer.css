@@ -1,0 +1,304 @@
+/* Freelancer Container */
+.freelancer-container {
+  padding: 140px 60px;
+  min-height: 100vh;
+}
+
+/* Section Title */
+.freelancer-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  background: linear-gradient(90deg, #00f5ff, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 30px;
+}
+/* Earnings Tabs */
+.earnings-tabs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.feed-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#00f5ff,#8b5cf6);
+}
+.community-navbar {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid #00f5ff44;
+}
+.remove-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ff4d4d;
+  transition: 0.3s;
+}
+
+.remove-icon:hover {
+  transform: scale(1.2);
+  color: red;
+}
+
+/* Big Total Card */
+.earnings-total-card {
+  text-align: center;
+  padding: 60px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#00f5ff22,#8b5cf622);
+  border: 1px solid #00f5ff55;
+  box-shadow: 0 0 30px #00f5ff33;
+  animation: pulseCard 3s infinite alternate;
+}
+
+.earnings-total-card h1 {
+  font-size: 64px;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(90deg,#00f5ff,#8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes pulseCard {
+  from { transform: scale(1); }
+  to { transform: scale(1.02); }
+}
+
+/* Table Card */
+.earnings-table-card {
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid #00f5ff33;
+}
+
+/* Neon Table */
+.neon-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.neon-table th {
+  padding: 12px;
+  background: #00f5ff22;
+  font-weight: bold;
+}
+
+.neon-table td {
+  padding: 12px;
+  border-top: 1px solid #00f5ff22;
+}
+/* Contract Card */
+.contract-card {
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #00f5ff33;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.contract-card:hover {
+  box-shadow: 0 0 25px #00f5ff55;
+  transform: translateY(-5px);
+}
+
+.contract-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000cc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-card {
+  background: #0f1b3d;
+  padding: 30px;
+  border-radius: 15px;
+  border: 1px solid #00f5ff55;
+  width: 400px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+.neon-table tr:hover {
+  background: #00f5ff11;
+}
+.neon-btn.active {
+  background: linear-gradient(90deg,#00f5ff,#8b5cf6);
+  box-shadow: 0 0 20px #00f5ff;
+}
+/* Glow Card */
+.freelancer-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #00f5ff33;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  backdrop-filter: blur(15px);
+  transition: 0.3s;
+}
+
+.freelancer-card:hover {
+  box-shadow: 0 0 25px #00f5ff55;
+  transform: translateY(-5px);
+}
+
+/* Skill Badge */
+.skill-badge {
+  padding: 8px 16px;
+  border-radius: 25px;
+  background: linear-gradient(90deg,#00f5ff,#8b5cf6);
+  display: inline-flex;
+  align-items: center;
+  margin: 5px;
+  font-size: 14px;
+}
+
+.skill-verified {
+  margin-left: 8px;
+  color: #00ff88;
+}
+
+/* Input Fields */
+.freelancer-input {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid #00f5ff55;
+  border-radius: 8px;
+  color: white;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.freelancer-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #00f5ff;
+}
+
+/* Section Block */
+.freelancer-block {
+  border: 1px solid #00f5ff22;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+/* Animated highlight line */
+.freelancer-card::before {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: linear-gradient(#00f5ff, #8b5cf6);
+}
+.project-card {
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #00f5ff33;
+  transition: 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px #00f5ff44;
+}
+
+.client-name {
+  color: #00f5ff;
+  margin-bottom: 10px;
+}
+
+.project-title {
+  font-size: 32px;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 15px;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.budget-text {
+  margin-top: 15px;
+  font-size: 18px;
+}
+/* Star Rating */
+.stars-container {
+  font-size: 30px;
+  margin: 20px 0;
+}
+
+.star {
+  cursor: pointer;
+  color: gray;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.active-star {
+  color: gold;
+  text-shadow: 0 0 10px gold;
+}
+.saved-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+  gap: 25px;
+}
+
+.saved-card {
+  padding: 20px;
+  text-align: center;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #00f5ff33;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.saved-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #00f5ff55;
+}
+
+.saved-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #00f5ff;
+  object-fit: cover;
+  margin-bottom: 10px;
+}

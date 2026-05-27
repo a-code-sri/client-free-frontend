@@ -1,0 +1,1543 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "TalentStage API",
+    "description": "Backend for the Freelancer Marketplace & AI Copilot",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/users/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Signup Endpoint",
+        "description": "Frontend Action: Registers a new user.",
+        "operationId": "signup_endpoint_api_users_signup_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSignup"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login Endpoint",
+        "description": "Frontend Action: Logs a user in and returns their safe profile data.",
+        "operationId": "login_endpoint_api_users_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLogin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}/profile": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Fetch User Profile Endpoint",
+        "description": "Frontend Action: Renders the profile page.\nReturns the user's name/email, and embeds their entire portfolio, \nindividual reviews, and overall rating if they are a freelancer.",
+        "operationId": "fetch_user_profile_endpoint_api_users__user_id__profile_get",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FullUserProfile"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/marketplace/requests": {
+      "get": {
+        "tags": [
+          "Marketplace"
+        ],
+        "summary": "Fetch Open Requests",
+        "description": "Used by Freelancers to browse available jobs.",
+        "operationId": "fetch_open_requests_api_marketplace_requests_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ClientRequest"
+                  },
+                  "type": "array",
+                  "title": "Response Fetch Open Requests Api Marketplace Requests Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Marketplace"
+        ],
+        "summary": "Post Client Request",
+        "operationId": "post_client_request_api_marketplace_requests_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientRequest"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/marketplace/proposals": {
+      "post": {
+        "tags": [
+          "Marketplace"
+        ],
+        "summary": "Post Proposal",
+        "operationId": "post_proposal_api_marketplace_proposals_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Proposal"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Proposal"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/marketplace/requests/{project_id}/proposals": {
+      "get": {
+        "tags": [
+          "Marketplace"
+        ],
+        "summary": "Fetch Project Proposals",
+        "description": "Used by Clients to view bids on their specific project.",
+        "operationId": "fetch_project_proposals_api_marketplace_requests__project_id__proposals_get",
+        "parameters": [
+          {
+            "name": "project_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Project Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Proposal"
+                  },
+                  "title": "Response Fetch Project Proposals Api Marketplace Requests  Project Id  Proposals Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/evaluate-proposal": {
+      "post": {
+        "tags": [
+          "AI Copilot"
+        ],
+        "summary": "Evaluate Proposal Endpoint",
+        "operationId": "evaluate_proposal_endpoint_api_ai_evaluate_proposal_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/scope-project": {
+      "post": {
+        "tags": [
+          "AI Copilot"
+        ],
+        "summary": "Scope Project Endpoint",
+        "description": "AI Endpoint: Validates and scopes a client's vague project idea.\nImplements a two-step Agentic routing process.",
+        "operationId": "scope_project_endpoint_api_ai_scope_project_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScopePayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/review-portfolio": {
+      "post": {
+        "tags": [
+          "AI Copilot"
+        ],
+        "summary": "Review Portfolio Endpoint",
+        "description": "AI Endpoint: Audits a freelancer's portfolio using a two-pass system:\n1. Deterministic regex/structural checks.\n2. LLM qualitative critique and rate evaluation.",
+        "operationId": "review_portfolio_endpoint_api_ai_review_portfolio_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortfolioReviewPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/match-freelancers": {
+      "post": {
+        "tags": [
+          "AI Copilot"
+        ],
+        "summary": "Match Freelancers Endpoint",
+        "description": "AI Endpoint: Ranks the top 5 freelancers for a specific project.\nApplies hard constraints (budget, time) before using FAISS + LLM for soft scoring.",
+        "operationId": "match_freelancers_endpoint_api_ai_match_freelancers_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmartMatchPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/generate-skill-test": {
+      "post": {
+        "tags": [
+          "AI Copilot"
+        ],
+        "summary": "Generate Test Endpoint",
+        "description": "AI Endpoint: Asynchronously generates a 10-question MCQ test for a specific skill \nusing live web context (DuckDuckGo RAG) to ensure modern relevance.",
+        "operationId": "generate_test_endpoint_api_ai_generate_skill_test_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateTestPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/evaluate-skill-test": {
+      "post": {
+        "tags": [
+          "AI Copilot"
+        ],
+        "summary": "Evaluate Test Endpoint",
+        "description": "Standard Endpoint: Grades the submitted test, calculates the percentage, \nand returns a detailed analysis report and Badge status.",
+        "operationId": "evaluate_test_endpoint_api_ai_evaluate_skill_test_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluateTestPayload"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/portfolios/{user_id}": {
+      "get": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "Fetch Portfolio",
+        "description": "Retrieves a freelancer's full portfolio.",
+        "operationId": "fetch_portfolio_api_portfolios__user_id__get",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FreelancerPortfolio"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "Update Portfolio",
+        "description": "Creates or updates the freelancer's portfolio.",
+        "operationId": "update_portfolio_api_portfolios__user_id__put",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "User Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FreelancerPortfolio"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FreelancerPortfolio"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/portfolios/bulk-upload": {
+      "post": {
+        "tags": [
+          "Portfolios"
+        ],
+        "summary": "Bulk Upload Portfolios",
+        "description": "Admin tool: Seed the database with multiple portfolios at once.",
+        "operationId": "bulk_upload_portfolios_api_portfolios_bulk_upload_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "items": {
+                  "$ref": "#/components/schemas/FreelancerPortfolio"
+                },
+                "type": "array",
+                "title": "Portfolios"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/contracts/from-proposal/{proposal_id}": {
+      "post": {
+        "tags": [
+          "Contracts & Payments"
+        ],
+        "summary": "Initiate Contract",
+        "description": "Client action: Hires the freelancer by accepting their proposal.\nGenerates the contract and updates project/proposal statuses.",
+        "operationId": "initiate_contract_api_contracts_from_proposal__proposal_id__post",
+        "parameters": [
+          {
+            "name": "proposal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Proposal Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/contracts/{contract_id}/milestones/{milestone_id}/approve": {
+      "post": {
+        "tags": [
+          "Contracts & Payments"
+        ],
+        "summary": "Process Milestone Approval",
+        "description": "Client action: Approves a completed milestone. \nSimulates the payment breakdown (10% platform fee).",
+        "operationId": "process_milestone_approval_api_contracts__contract_id__milestones__milestone_id__approve_post",
+        "parameters": [
+          {
+            "name": "contract_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Contract Id"
+            }
+          },
+          {
+            "name": "milestone_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Milestone Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reviews/": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Submit Review Endpoint",
+        "operationId": "submit_review_endpoint_api_reviews__post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientReview"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Root",
+        "operationId": "root__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BudgetRange": {
+        "properties": {
+          "min": {
+            "type": "number",
+            "title": "Min"
+          },
+          "max": {
+            "type": "number",
+            "title": "Max"
+          }
+        },
+        "type": "object",
+        "required": [
+          "min",
+          "max"
+        ],
+        "title": "BudgetRange"
+      },
+      "ClientRequest": {
+        "properties": {
+          "project_id": {
+            "type": "string",
+            "title": "Project Id"
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "required_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Required Skills"
+          },
+          "budget_range": {
+            "$ref": "#/components/schemas/BudgetRange"
+          },
+          "deadline": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Deadline"
+          },
+          "project_type": {
+            "$ref": "#/components/schemas/ProjectType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProjectStatus",
+            "default": "Open"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "project_id",
+          "client_id",
+          "title",
+          "description",
+          "required_skills",
+          "budget_range",
+          "deadline",
+          "project_type"
+        ],
+        "title": "ClientRequest"
+      },
+      "ClientReview": {
+        "properties": {
+          "freelancer_id": {
+            "type": "string",
+            "title": "Freelancer Id"
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id"
+          },
+          "stars": {
+            "type": "integer",
+            "maximum": 5.0,
+            "minimum": 1.0,
+            "title": "Stars",
+            "description": "Rating from 1 to 5"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "freelancer_id",
+          "client_id",
+          "stars",
+          "description"
+        ],
+        "title": "ClientReview",
+        "description": "Standalone schema for a review. Notice it links via freelancer_id."
+      },
+      "Education": {
+        "properties": {
+          "institution": {
+            "type": "string",
+            "title": "Institution"
+          },
+          "degree": {
+            "type": "string",
+            "title": "Degree"
+          },
+          "start_year": {
+            "type": "integer",
+            "title": "Start Year"
+          },
+          "end_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Year"
+          }
+        },
+        "type": "object",
+        "required": [
+          "institution",
+          "degree",
+          "start_year"
+        ],
+        "title": "Education"
+      },
+      "EvaluateTestPayload": {
+        "properties": {
+          "questions": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Questions"
+          },
+          "user_answers": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "User Answers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "questions",
+          "user_answers"
+        ],
+        "title": "EvaluateTestPayload"
+      },
+      "EvaluationPayload": {
+        "properties": {
+          "proposal": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Proposal"
+          },
+          "project": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Project"
+          }
+        },
+        "type": "object",
+        "required": [
+          "proposal",
+          "project"
+        ],
+        "title": "EvaluationPayload"
+      },
+      "FreelancerPortfolio": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "bio": {
+            "type": "string",
+            "title": "Bio"
+          },
+          "skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Skills"
+          },
+          "hourly_rate": {
+            "type": "number",
+            "title": "Hourly Rate"
+          },
+          "availability_status": {
+            "type": "string",
+            "title": "Availability Status"
+          },
+          "education": {
+            "items": {
+              "$ref": "#/components/schemas/Education"
+            },
+            "type": "array",
+            "title": "Education",
+            "default": [
+              
+            ]
+          },
+          "work_experience": {
+            "items": {
+              "$ref": "#/components/schemas/WorkExperience"
+            },
+            "type": "array",
+            "title": "Work Experience",
+            "default": [
+              
+            ]
+          },
+          "projects": {
+            "items": {
+              "$ref": "#/components/schemas/PortfolioProject"
+            },
+            "type": "array",
+            "title": "Projects",
+            "default": [
+              
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "bio",
+          "skills",
+          "hourly_rate",
+          "availability_status"
+        ],
+        "title": "FreelancerPortfolio"
+      },
+      "FullUserProfile": {
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "User Id"
+          },
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "portfolio": {
+            "anyOf": [
+              {
+                
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Portfolio"
+          },
+          "reviews": {
+            "items": {
+              
+            },
+            "type": "array",
+            "title": "Reviews",
+            "default": [
+              
+            ]
+          },
+          "rating": {
+            "type": "number",
+            "title": "Rating",
+            "default": 0.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_id",
+          "full_name",
+          "email",
+          "role"
+        ],
+        "title": "FullUserProfile"
+      },
+      "GenerateTestPayload": {
+        "properties": {
+          "skill": {
+            "type": "string",
+            "title": "Skill"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill"
+        ],
+        "title": "GenerateTestPayload"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Milestone": {
+        "properties": {
+          "milestone_id": {
+            "type": "string",
+            "title": "Milestone Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "amount": {
+            "type": "number",
+            "title": "Amount"
+          },
+          "due_date": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Due Date"
+          },
+          "is_approved": {
+            "type": "boolean",
+            "title": "Is Approved",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "milestone_id",
+          "title",
+          "amount",
+          "due_date"
+        ],
+        "title": "Milestone"
+      },
+      "PortfolioProject": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "tech_stack": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tech Stack"
+          },
+          "link": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2083,
+                "minLength": 1,
+                "format": "uri"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Link"
+          },
+          "images": {
+            "items": {
+              "type": "string",
+              "maxLength": 2083,
+              "minLength": 1,
+              "format": "uri"
+            },
+            "type": "array",
+            "title": "Images",
+            "default": [
+              
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "tech_stack"
+        ],
+        "title": "PortfolioProject"
+      },
+      "PortfolioReviewPayload": {
+        "properties": {
+          "portfolio": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Portfolio"
+          }
+        },
+        "type": "object",
+        "required": [
+          "portfolio"
+        ],
+        "title": "PortfolioReviewPayload"
+      },
+      "ProjectStatus": {
+        "type": "string",
+        "enum": [
+          "Open",
+          "In Progress",
+          "Completed",
+          "Cancelled"
+        ],
+        "title": "ProjectStatus"
+      },
+      "ProjectType": {
+        "type": "string",
+        "enum": [
+          "Fixed",
+          "Hourly"
+        ],
+        "title": "ProjectType"
+      },
+      "Proposal": {
+        "properties": {
+          "proposal_id": {
+            "type": "string",
+            "title": "Proposal Id"
+          },
+          "project_id": {
+            "type": "string",
+            "title": "Project Id"
+          },
+          "freelancer_id": {
+            "type": "string",
+            "title": "Freelancer Id"
+          },
+          "bid_amount": {
+            "type": "number",
+            "title": "Bid Amount"
+          },
+          "estimated_days": {
+            "type": "integer",
+            "title": "Estimated Days"
+          },
+          "cover_letter": {
+            "type": "string",
+            "title": "Cover Letter"
+          },
+          "proposed_milestones": {
+            "items": {
+              "$ref": "#/components/schemas/Milestone"
+            },
+            "type": "array",
+            "title": "Proposed Milestones",
+            "default": [
+              
+            ]
+          },
+          "attachments": {
+            "items": {
+              "type": "string",
+              "maxLength": 2083,
+              "minLength": 1,
+              "format": "uri"
+            },
+            "type": "array",
+            "title": "Attachments",
+            "default": [
+              
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/ProposalStatus",
+            "default": "Pending"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "proposal_id",
+          "project_id",
+          "freelancer_id",
+          "bid_amount",
+          "estimated_days",
+          "cover_letter"
+        ],
+        "title": "Proposal"
+      },
+      "ProposalStatus": {
+        "type": "string",
+        "enum": [
+          "Pending",
+          "Accepted",
+          "Rejected"
+        ],
+        "title": "ProposalStatus"
+      },
+      "RoleEnum": {
+        "type": "string",
+        "enum": [
+          "Freelancer",
+          "Client",
+          "Both"
+        ],
+        "title": "RoleEnum"
+      },
+      "ScopePayload": {
+        "properties": {
+          "client_input": {
+            "type": "string",
+            "title": "Client Input"
+          }
+        },
+        "type": "object",
+        "required": [
+          "client_input"
+        ],
+        "title": "ScopePayload"
+      },
+      "SmartMatchPayload": {
+        "properties": {
+          "project": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Project"
+          },
+          "all_freelancers": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "All Freelancers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "project",
+          "all_freelancers"
+        ],
+        "title": "SmartMatchPayload"
+      },
+      "UserLogin": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "title": "Password"
+          }
+        },
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "UserLogin"
+      },
+      "UserSignup": {
+        "properties": {
+          "full_name": {
+            "type": "string",
+            "title": "Full Name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "title": "Email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6,
+            "title": "Password",
+            "description": "Stored in DB, never returned."
+          },
+          "role": {
+            "$ref": "#/components/schemas/RoleEnum"
+          }
+        },
+        "type": "object",
+        "required": [
+          "full_name",
+          "email",
+          "password",
+          "role"
+        ],
+        "title": "UserSignup"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WorkExperience": {
+        "properties": {
+          "company": {
+            "type": "string",
+            "title": "Company"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "start_date": {
+            "type": "string",
+            "title": "Start Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "End Date"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "company",
+          "role",
+          "start_date",
+          "description"
+        ],
+        "title": "WorkExperience"
+      }
+    }
+  }
+}
